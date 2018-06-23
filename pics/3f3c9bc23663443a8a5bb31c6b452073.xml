@@ -1,0 +1,26 @@
+<annotation>
+	<folder>pics</folder>
+	<filename>3f3c9bc23663443a8a5bb31c6b452073.jpg</filename>
+	<path>C:\Users\micah\Desktop\Obj-Detectionb\pics\3f3c9bc23663443a8a5bb31c6b452073.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>600</width>
+		<height>750</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>macncheese</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>93</xmin>
+			<ymin>117</ymin>
+			<xmax>562</xmax>
+			<ymax>720</ymax>
+		</bndbox>
+	</object>
+</annotation>
