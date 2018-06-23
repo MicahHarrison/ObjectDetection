@@ -42,6 +42,9 @@ TENSORFLOW OBJECT DETECTION TUTORIAL
 			   cv2.destroyAllWindows()
 			   break
 	- run all cells to test. press q or click x to quit
+	(Warning: if you add all files to git and try to commit, the new model loaded is too big for git.
+	 If you want to remove the file from stage run "git reset HEAD path/to/unwanted_file". If you already 
+	 pushed and got the size error, run "git reset --soft HEAD^ " first.)
 	- create folder "images" in project directory
 	- read through scrape.py
 	- in the main fucntion edit lines:
@@ -56,3 +59,4 @@ TENSORFLOW OBJECT DETECTION TUTORIAL
 	- save of ctrl + s to save xml fine
 	- go to next image until you have labeled all the images
 	- we will later convert these xml files to csv (comma seperated value) files which are much more commonly used for training and testing
+	
