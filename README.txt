@@ -106,14 +106,31 @@ TENSORFLOW OBJECT DETECTION TUTORIAL
 	- now download the checkpoint model from http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_11_06_2017.tar.gz
 	- get the config file https://github.com/tensorflow/models/blob/master/research/object_detection/samples/configs/ssd_mobilenet_v1_coco.config
 	- extract checkpoint model to main project directory and move config file to training directory
-	- in config change:
+	- in config change and save in training:
 		1. number of classes to however many you are training
 		2. path to config to name of checkpoint model folder
 		3. input path to just data/train.record
 		4. labelmappath to data/object-detection.pbtxt
 		5. input path for test to data/test.record
-	- in training directory, create object-detection.pbtxt
+	- in training directory, create object-detection.pbtxt and write 
+		item {
+			id : number of itemd
+			name : "label"
+		}
 4.TRAIN AND TEST
-	- move data,images,ssdmobilnet, and trianing into /models/research/object_detection directory
+	- move data, ssdmobilnet, and trianing into /models/research/object_detection directory
 	- run python3 train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/ssd_mobilenet_v1_coco.config
  	- if you get "no module named deplayment", cd .. then run export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim again
+	- run for 2000-10000 steps then hit ctrl+z to stop the training after it has recorded a summary of the latest steps
+	- run python export_inference_graph.py \
+		    --input_type image_tensor \
+		    --pipeline_config_path training/ssd_mobilenet_v1_coco_11_06_2017.config \
+		    --trained_checkpoint_prefix training/model.ckpt-(number of last step recorded) \
+		    --output_directory (name of your new model)
+	- grab some test images and put them in the test_images folder and rename them to image(number of image).jpg
+	- run jupyter notebook to open Better_Obj_detection and change:
+		- change MODEL_NAME to name of folder with your new model
+		- change PATH_TO_LABELS to name object-detection.pbtxt (name of new labelmap)
+		- comment out the download model section
+		- under DETECTION change the range of images of TEST_IMAGE_PAHTS to new images in test_images folder
+		- run block that runs the model over still images to test new model
