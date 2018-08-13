@@ -51,7 +51,7 @@ TENSORFLOW OBJECT DETECTION TUTORIAL
 		parser.add_argument('-s', '--search', default='SEARCH TERMS', type=str, help='search term')
     		parser.add_argument('-n', '--num_images', default=NUMBER OF IMAGES YOU WANT, type=int, help='num images to save')
    		parser.add_argument('-d', '--directory', default='PATH TO IMAGES FOLDER', type=str, help='save directory')
-	- clone https://github.com/tzutalin/labelImg into project directory
+	- clone https://github.com/tzutalin/labelImg into project directory or use RectLabel for macOS
 	- enter labelImg directory and run py labelImg.py
 	- open dir images
 	- createRectBox or press w and draw a box around your custom object
