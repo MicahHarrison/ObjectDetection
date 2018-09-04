@@ -9,18 +9,15 @@ TENSORFLOW OBJECT DETECTION TUTORIAL
 	- pip install matplotlib
 	- Clone the model we will be using by cloneing the following:
 		 https://github.com/tensorflow/models.git
-	FOR WINDOWS: 
-		- Head to protoc releases page : https://github.com/google/protobuf/releases
-		- Download the latest protoc for windows and extract it in a folder with ur research models folder
-		- Within the research directory, open a terminal and run:
-			(C:/Program Files/protoc/bin/protoc) object_detection/protos/*.proto --python_out=.
-			(path to protoc.exe)
-		- From the object detection directory, run "jupyter notebook" and choose object_detection_tutorial.ipynb. 
-		- From there you should be able to run all cells and see the result on their test images.
+	- Head to protoc releases page : https://github.com/google/protobuf/releases
+	- Download protoc version 3.4.0 for your system and extract it in a folder with ur research models folder
+	- Within the research directory, open a terminal and run:
+		(C:/Program Files/protoc/bin/protoc) object_detection/protos/*.proto --python_out=.
+		(path to protoc.exe)
+	- From the object detection directory, run "jupyter notebook" and choose object_detection_tutorial.ipynb. 
+	- From there you should be able to run all cells and see the result on their test images.
 		
 2. Live video and Data Gathering
-
-	- for this portion, the newer demo released by tensorflow has an infamously slow frame rate. That is why for the rest of this 			project we will be working in the better_object_detection.ipynb
 	- to covert to live video, we will need to download opencv-python.
 	- pip install opencv-python
 	- changes necessary for live video:
@@ -114,7 +111,7 @@ TENSORFLOW OBJECT DETECTION TUTORIAL
 		5. input path for test to data/test.record
 	- in training directory, create object-detection.pbtxt and write 
 		item {
-			id : number of itemd
+			id : number of items
 			name : "label"
 		}
 4.TRAIN AND TEST
