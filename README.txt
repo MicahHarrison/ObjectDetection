@@ -8,7 +8,7 @@ TENSORFLOW OBJECT DETECTION TUTORIAL
 	- pip install jupyter
 	- pip install matplotlib
 	- Clone the model we will be using by cloneing the following:
-		 https://github.com/tensorflow/models/tree/master/research
+		 https://github.com/tensorflow/models.git
 	FOR WINDOWS: 
 		- Head to protoc releases page : https://github.com/google/protobuf/releases
 		- Download the latest protoc for windows and extract it in a folder with ur research models folder
