@@ -38,7 +38,7 @@ _GRAPHREWRITER = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      options=None),
   ],
   extensions=[
   ],
@@ -69,21 +69,21 @@ _QUANTIZATION = _descriptor.Descriptor(
       has_default_value=True, default_value=500000,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      options=None),
     _descriptor.FieldDescriptor(
       name='weight_bits', full_name='object_detection.protos.Quantization.weight_bits', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=True, default_value=8,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      options=None),
     _descriptor.FieldDescriptor(
       name='activation_bits', full_name='object_detection.protos.Quantization.activation_bits', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=True, default_value=8,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      options=None),
   ],
   extensions=[
   ],

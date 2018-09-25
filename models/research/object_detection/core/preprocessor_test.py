@@ -2377,6 +2377,40 @@ class PreprocessorTest(tf.test.TestCase):
       self.assertAllEqual(out_masks.get_shape().as_list(), expected_mask_shape)
       self.assertAllEqual(out_image.get_shape().as_list(), expected_image_shape)
 
+  def testResizeToRangeWithMasksAndPadToMaxDimension(self):
+    """Tests image resizing, checking output sizes."""
+    in_image_shape_list = [[60, 40, 3], [15, 30, 3]]
+    in_masks_shape_list = [[15, 60, 40], [10, 15, 30]]
+    min_dim = 50
+    max_dim = 100
+    expected_image_shape_list = [[100, 100, 3], [100, 100, 3]]
+    expected_masks_shape_list = [[15, 100, 100], [10, 100, 100]]
+
+    for (in_image_shape,
+         expected_image_shape, in_masks_shape, expected_mask_shape) in zip(
+             in_image_shape_list, expected_image_shape_list,
+             in_masks_shape_list, expected_masks_shape_list):
+      in_image = tf.placeholder(tf.float32, shape=(None, None, 3))
+      in_masks = tf.placeholder(tf.float32, shape=(None, None, None))
+      out_image, out_masks, _ = preprocessor.resize_to_range(
+          in_image,
+          in_masks,
+          min_dimension=min_dim,
+          max_dimension=max_dim,
+          pad_to_max_dimension=True)
+      out_image_shape = tf.shape(out_image)
+      out_masks_shape = tf.shape(out_masks)
+
+      with self.test_session() as sess:
+        out_image_shape, out_masks_shape = sess.run(
+            [out_image_shape, out_masks_shape],
+            feed_dict={
+                in_image: np.random.randn(*in_image_shape),
+                in_masks: np.random.randn(*in_masks_shape)
+            })
+        self.assertAllEqual(out_image_shape, expected_image_shape)
+        self.assertAllEqual(out_masks_shape, expected_mask_shape)
+
   def testResizeToRangeWithMasksAndDynamicSpatialShape(self):
     """Tests image resizing, checking output sizes."""
     in_image_shape_list = [[60, 40, 3], [15, 30, 3]]
@@ -2809,6 +2843,25 @@ class PreprocessorTest(tf.test.TestCase):
                                             include_multiclass_scores=False,
                                             include_instance_masks=True,
                                             include_keypoints=True)
+
+  def testConvertClassLogitsToSoftmax(self):
+    multiclass_scores = tf.constant(
+        [[1.0, 0.0], [0.5, 0.5], [1000, 1]], dtype=tf.float32)
+    temperature = 2.0
+
+    converted_multiclass_scores = (
+        preprocessor.convert_class_logits_to_softmax(
+            multiclass_scores=multiclass_scores, temperature=temperature))
+
+    expected_converted_multiclass_scores = [[[0.62245935, 0.37754068],
+                                             [0.5, 0.5], [1, 0]]]
+
+    with self.test_session() as sess:
+      (converted_multiclass_scores_) = sess.run([converted_multiclass_scores])
+
+      self.assertAllClose(converted_multiclass_scores_,
+                          expected_converted_multiclass_scores)
+
 
 if __name__ == '__main__':
   tf.test.main()
