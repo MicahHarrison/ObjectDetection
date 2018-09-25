@@ -28,7 +28,7 @@ FLAGS = flags.FLAGS
 
 # TO-DO replace this with label map
 def class_text_to_int(row_label):
-    if row_label == 'macncheese':
+    if row_label == '(LABEL USED IN XML)':
         return 1
     else:
         None
@@ -83,7 +83,7 @@ def create_tf_example(group, path):
 
 def main(_):
     writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
-    path = os.path.join(os.getcwd(), 'images')
+    path = os.path.join(os.getcwd(), 'PATH TO TRAIN PICTURES/PATH TO Test PICTURES')
     examples = pd.read_csv(FLAGS.csv_input)
     grouped = split(examples, 'filename')
     for group in grouped:

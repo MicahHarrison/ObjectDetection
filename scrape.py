@@ -78,9 +78,9 @@ def run(query, save_directory, num_images=100):
 
 def main():
     parser = argparse.ArgumentParser(description='Scrape Google images')
-    parser.add_argument('-s', '--search', default='macaroni and cheese', type=str, help='search term')
-    parser.add_argument('-n', '--num_images', default=100, type=int, help='num images to save')
-    parser.add_argument('-d', '--directory', default='/Users/micah/Desktop/Obj-Detectionb/pics', type=str, help='save directory')
+    parser.add_argument('-s', '--search', default='SEARCH TERMS', type=str, help='search term')
+    parser.add_argument('-n', '--num_images', default=NUMBER OF IMAGES YOU WANT, type=int, help='num images to save')
+    parser.add_argument('-d', '--directory', default='PATH TO IMAGES FOLDER', type=str, help='save directory')
     args = parser.parse_args()
     run(args.search, args.directory, args.num_images)
 
