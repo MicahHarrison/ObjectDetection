@@ -7,8 +7,6 @@ Object detection project for Codeology fall 2018
 	- pip install lxml
 	- pip install jupyter
 	- pip install matplotlib
-	- Clone the model we will be using by cloneing the following:
-		 https://github.com/tensorflow/models.git
 	- Head to protoc releases page : https://github.com/google/protobuf/releases
 	- Download protoc version 3.4.0 for your system and extract it in a folder with ur research models folder
 	- Within the research directory, open a terminal and run:
