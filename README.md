@@ -48,3 +48,59 @@ Object detection project for Codeology fall 2018
 	- type name of object (you only have to do this once)
 	- save of ctrl + s to save xml fine
 	- go to next image until you have labeled all the images
+##GENERATE TF RECORDS AND SETUP CONFIG FOR TRAINING
+	- create two directories: test and train in images folder and split 10% into test and 90% into train
+	- in xml_to_csv change:
+		def main():
+			image_path = os.path.join(os.getcwd(), 'annotations')
+			xml_df = xml_to_csv(image_path)
+			xml_df.to_csv('raccoon_labels.csv', index=None)
+			print('Successfully converted xml to csv.')
+		to:
+		def main():
+		    for directory in ['train','test']:
+			image_path = os.path.join(os.getcwd(), 'images/{}'.format(directory))
+			xml_df = xml_to_csv(image_path)
+			xml_df.to_csv('data/{}_labels.csv'.format(directory), index=None)
+			print('Successfully converted xml to csv.')
+	- create directories: data, training
+	- run python3 xml_to_csv.py and check if records are in data folder
+	- run python3 setup.py build and setup.py install in models/research directory
+		IF SETUP.PY FAILS, FOLLOW THESE STEPS:
+			1. ADD THE FOLLOWING TO GENERATE_TFRECORDS:
+				import sys		(        PATH TO YOU PROJECT              )
+					sys.path.append("C:\\Users\\micah\\Desktop\\Obj-Detectionb\\models")
+					sys.path.append("C:\\Users\\micah\\Desktop\\Obj-Detectionb\\models\\research")
+					sys.path.append("C:\\Users\\micah\\Desktop\\Obj-Detectionb\\models\\research\\slim")
+					sys.path.append("C:\\Users\\micah\\Desktop\\Obj-Detectionb\\models\\research\\object_detection")
+					sys.path.append("C:\\Users\\micah\\Desktop\\Obj-				Detectionb\\models\\research\\object_detection\\utils")
+			2. RUN export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim IN MODELS/RESEARCH DIRECTORY
+			3. IF PROBLEMS PERSIST, COPY RELEVANT FOLDERS FROM RESEARCH\SLIM INTO PYTHON\LIB\SITE-PAKAGES
+			
+	- in generate_tfrecords change:
+		- # CAN ADD MULTIPLE LABELS OR SWITCH STATEMENT
+		def class_text_to_int(row_label):
+		    if row_label == '(LABEL USED IN XML)':
+			return 1
+		    else:
+			None
+		- In main function:
+			path = os.path.join(os.getcwd(), '(PATH TO TRAIN PICTURES')
+	- run python3 generate_tfrecord.py --csv_input=data/train_labels.csv  --output_path=data/train.record in main parent directory
+		- In main function:
+			path = os.path.join(os.getcwd(), '(PATH TO TEST PICTURES')
+	- run python generate_tfrecord.py --csv_input=data/test_labels.csv  --output_path=data/test.record in main parent directory
+	- now download the blank checkpoint model from http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_11_06_2017.tar.gz
+	- get the config file models/blob/master/research/object_detection/samples/configs/ssd_mobilenet_v1_coco.config and copy it into training directory
+	- extract checkpoint model to main project directory
+	- in config change and save in training:
+		1. number of classes to however many you are training
+		2. path to chekcpoint to name of checkpoint model folder
+		3. input path to just data/train.record
+		4. labelmappath to data/object-detection.pbtxt
+		5. input path for eval to data/test.record
+	- in training directory, create object-detection.pbtxt and write 
+		item {
+			id : number of itemd
+			name : "label"
+		}
