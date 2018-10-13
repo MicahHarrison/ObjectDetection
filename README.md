@@ -76,7 +76,6 @@ Object detection project for Codeology fall 2018
 					sys.path.append("C:\\Users\\micah\\Desktop\\Obj-				Detectionb\\models\\research\\object_detection\\utils")
 			2. RUN export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim IN MODELS/RESEARCH DIRECTORY
 			3. IF PROBLEMS PERSIST, COPY RELEVANT FOLDERS FROM RESEARCH\SLIM INTO PYTHON\LIB\SITE-PAKAGES
-			
 	- in generate_tfrecords change:
 		- # CAN ADD MULTIPLE LABELS OR SWITCH STATEMENT
 		def class_text_to_int(row_label):
