@@ -48,7 +48,7 @@ Object detection project for Codeology fall 2018
 	- type name of object (you only have to do this once)
 	- save of ctrl + s to save xml fine
 	- go to next image until you have labeled all the images
-##GENERATE TF RECORDS AND SETUP CONFIG FOR TRAINING
+## Generate TF records and set up Config for training
 	- create two directories: test and train in images folder and split 10% into test and 90% into train
 	- in xml_to_csv change:
 		def main():
