@@ -124,4 +124,24 @@ Object detection project for Codeology fall 2018
 		- under DETECTION change the range of images of TEST_IMAGE_PAHTS to new images in test_images folder
 		- run block that runs the model over still images to test new model
 ## Extra: Adapt to use pre-recorded video
-	
+	# Import everything needed to edit/save/watch video clips# Import 
+	from moviepy.editor import VideoFileClip
+	from IPython.display import HTML
+	def process_image(image):
+	    # NOTE: The output you return should be a color image (3 channel) for processing video below
+	    # you should return the final output (image with lines are drawn on lanes)
+	    with detection_graph.as_default():
+		with tf.Session(graph=detection_graph) as sess:
+		    image_process = detect_objects(image, sess, detection_graph)
+		    return image_process
+	    
+	white_output  = '(name of output video file)'
+	clip1 = VideoFileClip("(name of input video file)")
+	white_clip = clip1.fl_image(process_image) #NOTE: this function expects color images!!s
+	%time white_clip.write_videofile(white_output, audio=False)
+
+	HTML("""
+	<video width="960" height="540" controls>
+	  <source src="{0}">
+	</video>
+	""".format(white_output))
