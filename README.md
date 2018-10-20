@@ -103,3 +103,25 @@ Object detection project for Codeology fall 2018
 			id : number of itemd
 			name : "label"
 		}
+## Train and Test
+	- move data, ssdmobilnet, and trianing into /models/research/object_detection directory
+	- run python3 train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/ssd_mobilenet_v1_coco.config
+ 	- if you get "no module named deplayment", cd .. then run export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim again
+	- run for 2000-10000 steps then hit ctrl+z to stop the training after it has recorded a summary of the latest steps
+	- might need to update tensorflow
+	- might need to adjust batch_size var in config if you get memory error
+	- run python export_inference_graph.py \
+		    --input_type image_tensor \
+		    --pipeline_config_path training/ssd_mobilenet_v1_coco_11_06_2017.config \
+		    --trained_checkpoint_prefix training/model.ckpt-(number of last step recorded) \
+		    --output_directory (name of your new model)
+	- grab some test images and put them in the test_images folder and rename them to image(number of image).jpg
+	- run jupyter notebook to open Better_Obj_detection and change:
+		- change MODEL_NAME to name of folder with your new model
+		- change PATH_TO_LABELS to name object-detection.pbtxt (name of new labelmap)
+		- comment out the Download Model section
+		- change num classes to the number of objects you are tracking
+		- under DETECTION change the range of images of TEST_IMAGE_PAHTS to new images in test_images folder
+		- run block that runs the model over still images to test new model
+## Extra: Adapt to use pre-recorded video
+	
